@@ -114,3 +114,9 @@ function animate() {
 init();
 animate();
 
+// resize event
+window.addEventListener('resize', function() {
+    canvas.width = innerWidth;
+    canvas.height = this.innerHeight;
+})
+
