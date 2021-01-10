@@ -15,6 +15,8 @@ const colors = [
 // average of animation
 const maxSize = 40;
 const minSize = 0;
+// refers to pixel around mouse
+const mouseRadius = 60;
 
 // mouse position with eventlistener
 let mouse = {
@@ -30,5 +32,57 @@ window.addEventListener('mousemove',
         console.log(mouse);
     }
 )
+
+// create constructor function for particle
+function Particle(x, y, directionX, directionY, size, color) {
+    this.x = x;
+    this.y = y;
+    this.directionX = directionX;
+    this.directionY = directionY;
+    this.size = size;
+    this.color = color;
+}
+
+// add draw method prototype separately for particle constructor 
+Particle.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+}
+
+// add update method for particle prototype
+Particle.prototype.update = function() {
+    if (this.x + this.size * 2 > canvas.width || 
+        this.x - this.size * 2 < 0
+        ) {
+                this.directionX = this.directionX;
+        }
+    if (this.y + this.size * 2 > canvas.height || 
+        this.y - this.size * 2 < 0
+            ) {
+                this.directionY = this.directionY;
+        }
+        this.x += this.directionX;
+        this.y += this.directionY;
+
+        // mouse interactivity 
+        if ( mouse.x - this.x < mouseRadius
+            && mouse.x - this.x > -mouseRadius
+            && mouse.y - this.y < mouseRadius
+            && mouse.y - this.y > -mouseRadius) {
+                if (this.size < maxSize) {
+                    this.size += 3;
+                }
+            } else if (this.size > minSize) {
+                    this.size -= 0.1;
+            }
+            if (this.size < 0) {
+                this.size = 0;
+            }
+
+            this.draw();
+
+}
 
 
