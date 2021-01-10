@@ -85,4 +85,20 @@ Particle.prototype.update = function() {
 
 }
 
+// create particle array 
+function init() {
+    particleArray = [];
+    for (let i = 0; i < 1000; i++) {
+        let size = 0;
+        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let directionX = (Math.random() * .2) - .1;
+        let directionY = (Math.random() * .2) - .1;
+        let color = colors[Math.floor(Math.random() * colors.length)];
+
+        particleArray.push(new Particle(x, y, directionX, directionY, size, color));
+
+    }
+}
+
 
