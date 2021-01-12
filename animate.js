@@ -7,9 +7,9 @@ ctx.canvas.height = window.innerHeight;
 let particleArray = [];
 const colors = [
     'white',
-    'rbga(255,255,255,0.3)',
-    'rbga(173,216,230,0.8)',
-    'rbga(211,211,211,0.8)'
+    'rgba(255,255,255,0.3)',
+    'rgba(173,216,230,0.8)',
+    'rgba(211,211,211,0.8)'
 ];
 
 // average of animation
@@ -28,7 +28,7 @@ let mouse = {
 window.addEventListener('mousemove', 
     function(event){
         mouse.x = event.x;
-        mouse.y = event.y
+        mouse.y = event.y;
         console.log(mouse);
     }
 )
@@ -91,7 +91,7 @@ function init() {
     for (let i = 0; i < 1000; i++) {
         let size = 0;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size *2 );
         let directionX = (Math.random() * .2) - .1;
         let directionY = (Math.random() * .2) - .1;
         let color = colors[Math.floor(Math.random() * colors.length)];
@@ -117,6 +117,8 @@ animate();
 // resize event
 window.addEventListener('resize', function() {
     canvas.width = innerWidth;
-    canvas.height = this.innerHeight;
+    canvas.height = innerHeight;
+    init();
+
 })
 
